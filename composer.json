@@ -1,0 +1,43 @@
+{
+  "name": "heimrichhannot/contao-assignment_notification_center",
+  "description": "Get assignee data tokens within notification_center.",
+  "keywords": [
+    "contao",
+    "assignment",
+    "notification_center",
+    "tokens"
+  ],
+  "type": "contao-module",
+  "homepage": "https://github.com/heimrichhannot/contao-assignment_notification_center",
+  "license": "LGPL-3.0+",
+  "authors": [
+    {
+      "name": "Heimrich & Hannot",
+      "email": "digitales@heimrich-hannot.de",
+      "homepage": "http://www.heimrich-hannot.de",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/heimrichhannot/contao-assignment_notification_center/issues"
+  },
+  "require": {
+    "php": "~5.4 || ~7.0",
+    "contao/core-bundle": "^3.5.1 || ~4.1",
+    "contao-community-alliance/composer-plugin": "~2.4 || ~3.0",
+    "heimrichhannot/notification_center_plus": "^1.0.29",
+    "heimrichhannot/contao-assignment": "~1.0"
+  },
+  "autoload": {
+    "classmap": [
+      ""
+    ]
+  },
+  "extra": {
+    "contao": {
+      "sources": {
+        "": "system/modules/assignment_notification_center"
+      }
+    }
+  }
+}
