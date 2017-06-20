@@ -18,6 +18,8 @@ $arrLang['assignmentArchive'] = ['Assignment archive', 'Select the assignment ar
 $arrLang['assignmentMapping'] = ['Assignment mapping', 'Declare assignment mapping conditions.'];
 $arrLang['assignmentMapping_value'] = ['Value/token', 'Enter the name of the token like `form_value_postal` or a value like `de`.'];
 $arrLang['assignmentMapping_field'] = ['Field name', 'Enter the name of the `tl_assignment_data` field like `postal`.'];
+$arrLang['assignmentFallbackEmails'] = ['Default emails (Fallback)', 'Specify multiple e-mails to be used if no assignment could be made.'];
+$arrLang['assignmentFallbackForce'] = ['Always add default emails', 'Even if assignments have been found, the default emails are added.'];
 
 /**
  * Legends

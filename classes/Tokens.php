@@ -15,6 +15,7 @@ use HeimrichHannot\Assignment\Assignment;
 use HeimrichHannot\Assignment\AssignmentDataModel;
 use HeimrichHannot\Assignment\AssignmentModel;
 use HeimrichHannot\Assignment\Util\Assignee;
+use NotificationCenter\Util\String;
 
 class Tokens extends \Controller
 {
@@ -35,7 +36,7 @@ class Tokens extends \Controller
 
         if ($objMessage->addAssignment)
         {
-            $this->addAssigneeTokens();
+            $this->addAssigneeEmailTokens();
         }
 
         $arrTokens = $this->arrTokens;
@@ -43,13 +44,44 @@ class Tokens extends \Controller
         return true;
     }
 
-    protected function addAssigneeTokens()
+    /**
+     * Add assignee email tokens
+     */
+    protected function addAssigneeEmailTokens()
     {
+        $arrEmails         = $this->getAssigneeEmails();
+        $arrFallbackEmails = String::compileRecipients($this->objMessage->assignmentFallbackEmails, $this->arrTokens);
+
+        // add default emails
+        if (empty($arrEmails) || $this->objMessage->assignmentFallbackForce)
+        {
+            $arrEmails = array_merge($arrEmails, $arrFallbackEmails);
+        }
+
+        $arrEmails = array_unique(array_filter($arrEmails));
+
+        foreach ($arrEmails as $key => $email)
+        {
+            $this->arrTokens['assignee_email_' . $key] = $email;
+        }
+
+        $this->arrTokens['assignee_emails'] = implode(',', $arrEmails);
+    }
+
+    /**
+     * Get all assignee emails as array
+     *
+     * @return array
+     */
+    protected function getAssigneeEmails()
+    {
+        $arrEmails = [];
+
         $objAssignment = AssignmentModel::findByPk($this->objMessage->assignmentArchive);
 
         if ($objAssignment === null)
         {
-            return;
+            return null;
         }
 
         $arrColumns = [];
@@ -72,24 +104,22 @@ class Tokens extends \Controller
 
         if (empty($arrColumns) || empty($arrValues))
         {
-            return;
+            return $arrEmails;
         }
 
         $objData = AssignmentDataModel::findPublishedBy($arrColumns, $arrValues);
 
         if ($objData === null)
         {
-            return;
+            return $arrEmails;
         }
 
         $objAssignees = AssigneeModel::findPublishedByPids($objData->fetchEach('id'));
 
         if ($objAssignees === null)
         {
-            return;
+            return $arrEmails;
         }
-
-        $arrEmails = [];
 
         while ($objAssignees->next())
         {
@@ -103,11 +133,11 @@ class Tokens extends \Controller
 
         $arrEmails = array_unique(array_filter($arrEmails));
 
-        foreach ($arrEmails as $key => $email)
+        if (empty($arrEmails))
         {
-            $this->arrTokens['assignee_email_' . $key] = $email;
+            return $arrEmails;
         }
 
-        $this->arrTokens['assignee_emails'] = implode(',', $arrEmails);
+        return $arrEmails;
     }
 }

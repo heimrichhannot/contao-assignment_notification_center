@@ -18,6 +18,8 @@ $arrLang['assignmentArchive'] = ['Zuordnungsarchiv', 'Wählen Sie das Zuordnungs
 $arrLang['assignmentMapping'] = ['Zuordnungskonfiguration', 'Deklariere die Zuordnungskonfiguration.'];
 $arrLang['assignmentMapping_value'] = ['Wert/Token', 'Geben Sie den Namen des Tokens wie `form_value_postal` oder einen Wert wie `de` ein.'];
 $arrLang['assignmentMapping_field'] = ['Feldname', 'Geben Sie den Namen des `tl_assignment_data` Feldes wie `postal` ein.'];
+$arrLang['assignmentFallbackEmails'] = ['Standard E-Mails (Fallback)', 'Geben Sie mehrer E-Mails an an die verwendet werden sollen, wenn keine Zuordnung getroffen werden konnte.'];
+$arrLang['assignmentFallbackForce'] = ['Standard E-Mails immer hinzufügen', 'Auch wenn Zuordnungen gefunden wurden, werden die Standard E-Mails hinzugefügt.'];
 
 /**
  * Legends
