@@ -50,7 +50,7 @@ class Tokens extends \Controller
     protected function addAssigneeEmailTokens()
     {
         $arrEmails         = $this->getAssigneeEmails();
-        $arrFallbackEmails = String::compileRecipients($this->objMessage->assignmentFallbackEmails, $this->arrTokens);
+        $arrFallbackEmails = \StringUtil::compileRecipients($this->objMessage->assignmentFallbackEmails, $this->arrTokens);
 
         // add default emails
         if (empty($arrEmails) || $this->objMessage->assignmentFallbackForce)
