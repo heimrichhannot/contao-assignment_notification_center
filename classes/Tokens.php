@@ -10,14 +10,13 @@
 
 namespace HeimrichHannot\Assignment\NotificationCenter;
 
+use Contao\Controller;
 use HeimrichHannot\Assignment\AssigneeModel;
-use HeimrichHannot\Assignment\Assignment;
 use HeimrichHannot\Assignment\AssignmentDataModel;
 use HeimrichHannot\Assignment\AssignmentModel;
 use HeimrichHannot\Assignment\Util\Assignee;
-use NotificationCenter\Util\String;
 
-class Tokens extends \Controller
+class Tokens extends Controller
 {
     protected $objMessage;
 
@@ -50,7 +49,7 @@ class Tokens extends \Controller
     protected function addAssigneeEmailTokens()
     {
         $arrEmails         = $this->getAssigneeEmails();
-        $arrFallbackEmails = \StringUtil::compileRecipients($this->objMessage->assignmentFallbackEmails, $this->arrTokens);
+        $arrFallbackEmails = \NotificationCenter\Util\StringUtil::compileRecipients($this->objMessage->assignmentFallbackEmails, $this->arrTokens);
 
         // add default emails
         if (empty($arrEmails) || $this->objMessage->assignmentFallbackForce)
@@ -95,7 +94,7 @@ class Tokens extends \Controller
                 continue;
             }
 
-            $field = \StringUtil::decodeEntities($condition['field']);
+            $field = \Contao\StringUtil::decodeEntities($condition['field']);
             $value = \Haste\Util\StringUtil::recursiveReplaceTokensAndTags($condition['value'], $this->arrTokens);
 
             $arrColumns[] = "tl_assignment_data.$field = ?";
