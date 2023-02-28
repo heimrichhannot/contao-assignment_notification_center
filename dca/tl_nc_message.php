@@ -1,12 +1,18 @@
 <?php
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+
 $dc = &$GLOBALS['TL_DCA']['tl_nc_message'];
 
 /**
  * Palettes
  */
 $dc['palettes']['__selector__'][] = 'addAssignment';
-$dc['palettes']['email']          = str_replace('{publish_legend}', '{assignment_legend},addAssignment;{publish_legend}', $dc['palettes']['email']);
+
+PaletteManipulator::create()
+    ->addLegend('assignment_legend', 'publish_legend', PaletteManipulator::POSITION_BEFORE)
+    ->addField('addAssignment', 'assignment_legend', PaletteManipulator::POSITION_APPEND)
+    ->applyToPalette('email', 'tl_nc_message');
 
 
 /**

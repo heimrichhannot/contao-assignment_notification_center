@@ -11,6 +11,7 @@
 namespace HeimrichHannot\Assignment\NotificationCenter;
 
 use Contao\Controller;
+use Contao\StringUtil;
 use HeimrichHannot\Assignment\AssigneeModel;
 use HeimrichHannot\Assignment\AssignmentDataModel;
 use HeimrichHannot\Assignment\AssignmentModel;
@@ -85,7 +86,7 @@ class Tokens extends Controller
 
         $arrColumns = [];
         $arrValues  = [];
-        $arrMapping = deserialize($this->objMessage->assignmentMapping);
+        $arrMapping = StringUtil::deserialize($this->objMessage->assignmentMapping);
 
         foreach ($arrMapping as $condition)
         {
@@ -94,7 +95,7 @@ class Tokens extends Controller
                 continue;
             }
 
-            $field = \Contao\StringUtil::decodeEntities($condition['field']);
+            $field = StringUtil::decodeEntities($condition['field']);
             $value = \Haste\Util\StringUtil::recursiveReplaceTokensAndTags($condition['value'], $this->arrTokens);
 
             $arrColumns[] = "tl_assignment_data.$field = ?";

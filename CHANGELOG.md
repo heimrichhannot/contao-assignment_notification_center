@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2023-02-29
+- Changed: raised contao and php dependency
+- Changed: allow php 8
+- Changed: small code enhancements
+
 ## [1.0.3] - 2018-06-22
 
 #### Fixed
